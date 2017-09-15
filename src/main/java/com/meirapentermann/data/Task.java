@@ -1,6 +1,8 @@
 package com.meirapentermann.data;
 
-public class Task {
+import java.util.Comparator;
+
+public class Task implements Comparator<Task> {
 	private String name;
 	private String description;
 	private String category;
@@ -66,6 +68,19 @@ public class Task {
 
 	public void setImageLink(String imageLink) {
 		this.imageLink = imageLink;
+	}
+
+	@Override
+	public int compare(Task o1, Task o2) {
+		if (o1.getPriority() > o2.getPriority()) {
+			return 1;
+		}
+		else if (o2.getPriority() > o1.getPriority()) {
+			return -1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 }

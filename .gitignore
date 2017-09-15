@@ -3,3 +3,5 @@ target
 build
 bin
 classes
+gradle
+gradlew
