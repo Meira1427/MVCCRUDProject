@@ -11,7 +11,7 @@
 </head>
 <body>
    <div class="header">
-       <h1 class="myTitle">My Task List</h1>
+       <h1 class="myTitle">My Task View</h1>
        <div id="navbar">
            <ul>
                <li class="colorButton"><a href="#">Choice 3</a></li>
@@ -21,7 +21,7 @@
        </div>
    </div>
    <div id="hidden_header">
-       <h1 class="myTitle">My Task List</h1>
+       <h1 class="myTitle">My Task View</h1>
        <div id="navbar">
            <ul>
                <li class="colorButton"><a href="#">Choice 3</a></li>
@@ -31,31 +31,15 @@
        </div>
    </div>
    <div class="main">
-	<c:set var="count" value="1"></c:set>
-		<table>
-		<tr>
-			<th></th>
-			<th>Priority</th>
-			<th>Task</th>
-			<th>Description</th>
-			<th>Category<th>
-			<th></th>
-		</tr>
-		<c:forEach var="task" items="${list}">
-		<tr>
-			<td><img src="${task.imageLink}" alt="task" width="50" height="50"></td>
-			<td>${task.priority}</td>
-			<td>${task.item}</td>
-			<td>${task.description}</td>
-			<td>${task.category}</td>
-			<td><a href="select.do?item=${task.item}">Select</a></td>
-		</tr>
-		<c:set var="count" value="${count+1}"/>
-		</c:forEach>
-		</table>
-		<form action="new.do" method="get">
-			<input type="submit" name="new" value="New Task">
-		</form>
+   	<h2>Categories</h2>
+   	 <div class="cats">
+	   <form:form action="newcat.do" method="post" modelAttribute="task">
+			<c:forEach var="cat" items="${cats}">
+				${cat}<br>
+			</c:forEach>
+			<input type="submit" name="submit" value="New Category"></input>
+		</form:form>
 	</div>
-	</body>
+  </div>
+</body>
 </html>

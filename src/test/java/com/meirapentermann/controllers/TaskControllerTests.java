@@ -2,7 +2,6 @@ package com.meirapentermann.controllers;
 
 import static junit.framework.TestCase.fail;
 import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -24,7 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
 @RunWith(SpringJUnit4ClassRunner.class)  //run tests using this special Spring class
-@ContextConfiguration(locations = { "StateControllerTests-context.xml" }) // with this Spring config file
+@ContextConfiguration(locations = { "TaskControllerTests-context.xml" }) // with this Spring config file
 @WebAppConfiguration  //and treat it like a WebApp(something TomCat could run
 public class TaskControllerTests {
 	MockMvc mockMvc;  //Need one of these to "perform()" requests
@@ -57,20 +56,14 @@ public class TaskControllerTests {
 	}
 
 	@Test
-	public void test_GET_Something() {
+	public void test_GET_home_do_returns_listview() {
 		try {
-			MvcResult result = mockMvc.perform(get("/Something.do").param("name", "Colorado"))
+			MvcResult result = mockMvc.perform(get("/home.do"))
 					.andExpect(status().isOk()).andReturn();
 			ModelAndView mv = result.getModelAndView();
 			assertEquals("listview", mv.getViewName());
 			ModelMap map = mv.getModelMap(); //what is in the model and available to JSP?
-			assertNotNull(map.get("state"));
-
-////			State st = (State) map.get("state");
-//			assertEquals("Colorado", st.getName());
-//			assertEquals("CO", st.getAbbreviation());
-//			assertEquals("3", st.getLatitude());
-//			assertEquals("4", st.getLongitude()); // - test other fields
+			assertNotNull(map.get("list"));
 
 		} catch (Exception e) {
 			e.printStackTrace();

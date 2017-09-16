@@ -1,130 +1,172 @@
 package com.meirapentermann.controllers;
-import java.util.ArrayList;
+
+	import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
+
 import com.meirapentermann.data.Task;
 import com.meirapentermann.data.TaskDAO;
 
-public class MockTaskDAO implements TaskDAO {
+	public class MockTaskDAO implements TaskDAO {
+		private String fileName = "WEB-INF/tasks.txt";
+		private List<Task> tasks;
+		private Set<String> categories;
+		
+		@Autowired
+		private WebApplicationContext wc;
+		
+		public MockTaskDAO() {
+			this.tasks = new ArrayList<>();
+		}
+		
+		public void loadTasks() {
+			tasks.add(new Task("Task 1", "Description 1", "", 1, "https://cdn2.iconfinder.com/data/icons/business-office-icons/256/To-do_List-256.png"));
+			tasks.add(new Task("Task 2", "Description 2", "", 2, "https://cdn2.iconfinder.com/data/icons/business-office-icons/256/To-do_List-256.png"));
+			tasks.add(new Task("Task 3", "Description 3", "", 3, "https://cdn2.iconfinder.com/data/icons/business-office-icons/256/To-do_List-256.png"));
+		}
 
-	List<Task> mockTasks;
-	Set<String> mockCategories = new HashSet<>();
-	
-	public MockTaskDAO() {
-		mockTasks = new ArrayList<>();
-		loadTasks();
-	}
+		public MockTaskDAO (List<Task> tasks) {
+			this.tasks = tasks;
+		}
 
-	public void loadTasks(){
-		mockTasks.clear();
-		mockTasks.add(new Task("Test 1", "My Test Class 1", "household", 2, "http://www.getzcope.com/blog/wp-content/uploads/2009/10/to-do-list.jpg"));
-		mockTasks.add(new Task("Test 2", "My Test Class 2", "school", 1, "http://www.getzcope.com/blog/wp-content/uploads/2009/10/to-do-list.jpg"));
-		mockTasks.add(new Task("Test 3", "My Test Class 3", "household", 2, "http://www.getzcope.com/blog/wp-content/uploads/2009/10/to-do-list.jpg"));
-	}
+		@Override
+		public List<Task> getTasks() {
+			return tasks;
+		}
 
-	@Override
-	public void addNewTask(Task t) {
-		mockTasks.add(t);
-		this.reOrderTasks();
-	}
+		public void setTasks(List<Task> tasks) {
+			this.tasks = tasks;
+			this.reOrderTasks();
+		}
 
-	@Override
-	public void removeTask(Task t) {
-		for (int i = 0; i < mockTasks.size(); i++) {
-			if (t.getName().equals(mockTasks.get(i).getName())) {
-				mockTasks.remove(i);
+		@Override
+		public Set<String> getCategories() {
+			return categories;
+		}
+
+		public void setCategories(Set<String> categories) {
+			this.categories = categories;
+		}
+
+		@Override
+		public void addNewTask(Task t) {
+			tasks.add(t);
+			this.reOrderTasks();
+		}
+
+		@Override
+		public void removeTask(Task t) {
+			for (int i = 0; i < tasks.size(); i++) {
+				if (t.getItem().equals(tasks.get(i).getItem())) {
+					tasks.remove(i);
+				}
+			}
+			this.reOrderTasks();
+		}
+		
+
+		@Override
+		public void editTaskPriority(Task t, int p) {
+			for (int i = 0; i < tasks.size(); i++) {
+				if (tasks.get(i).getPriority() == p) {
+					tasks.get(i).setPriority(p + 1);
+					for(int j = i; j < tasks.size(); j++) {
+						tasks.get(j).setPriority(tasks.get(j).getPriority() +1);
+					}
+				}
+				if (tasks.get(i).getItem().equals(t.getItem())) {
+					tasks.get(i).setPriority(p);
+				}
+			}
+			this.reOrderTasks();
+		}
+
+		@Override
+		public void editTaskItemName(Task t, String n) {
+			for (int i = 0; i < tasks.size(); i++) {
+				if (tasks.get(i).getItem().equals(t.getItem())) {
+					tasks.get(i).setItem(n);
+				}
 			}
 		}
-		this.reOrderTasks();
-	}
 
-	@Override
-	public void reOrderTasks() {
-		Collections.sort(mockTasks);
-	}
-
-	@Override
-	public Task getTaskByName(String n) {
-		Task answer = null;
-		for (int i = 0; i < mockTasks.size(); i++) {
-			if (mockTasks.get(i).getName().equals(n)) {
-				answer = mockTasks.get(i);
-				break;
+		@Override
+		public void editTaskDescritpion(Task t, String d) {
+			for (int i = 0; i < tasks.size(); i++) {
+				if (tasks.get(i).getItem().equals(t.getItem())) {
+					tasks.get(i).setDescription(d);
+				}
 			}
 		}
-		return answer;
-	}
 
-	@Override
-	public Task getTaskByDescription(String d) {
-		Task answer = null;
-		for (int i = 0; i < mockTasks.size(); i++) {
-			if (mockTasks.get(i).getDescription().contains(d)) {
-				answer = mockTasks.get(i);
-				break;
+		@Override
+		public void editTaskCategory(Task t, String c) {
+			for (int i = 0; i < tasks.size(); i++) {
+				if (tasks.get(i).getItem().equals(t.getItem())) {
+					tasks.get(i).setCategory(c);
+				}
 			}
 		}
-		return answer;
-	}
-
-	@Override
-	public List<Task> getTasksByCategory(String c) {
-		List<Task> answer = new ArrayList<>();
-		for (int i = 0; i < mockTasks.size(); i++) {
-			if(mockTasks.get(i).getCategory().contains(c)) {
-				answer.add(mockTasks.get(i));
+		
+		@Override
+		public void editTaskLink(Task t, String l) {
+			for (int i = 0; i < tasks.size(); i++) {
+				if (tasks.get(i).getItem().equals(t.getItem())) {
+					tasks.get(i).setImageLink(l);
+				}
 			}
 		}
-		return answer;
-	}
 
-	public List<Task> getTasks() {
-		return mockTasks;
-	}
-
-	public void setTasks(List<Task> mockTasks) {
-		this.mockTasks = mockTasks;
-	}
-
-	public Set<String> getCategories() {
-		return mockCategories;
-	}
-
-	public void setCategories(Set<String> mockCategories) {
-		this.mockCategories = mockCategories;
-	}
-
-	@Override
-	public Task editTaskPriority(Task t, int p) {
-		t.setPriority(p);
-		for (int i = 0; i < mockTasks.size(); i++) {
-			if (mockTasks.get(i).getPriority() == p) {
-				mockTasks.get(i).setPriority(mockTasks.get(i).getPriority() + 1);
-			}
+		@Override
+		public void reOrderTasks() {
+			Collections.sort(tasks);
 		}
-		this.reOrderTasks();
-		return t;
+
+		@Override
+		public Task getTaskByItemName(String n) {
+			n = n.toLowerCase();
+			Task answer = null;
+			for (int i = 0; i < tasks.size(); i++) {
+				String current = tasks.get(i).getItem().toLowerCase();
+				if (current.equals(n)) {
+					answer = tasks.get(i);
+					break;
+				}
+			}
+			return answer;
+		}
+
+		@Override
+		public Task getTaskByDescription(String d) {
+			d = d.toLowerCase();
+			Task answer = null;
+			for (int i = 0; i < tasks.size(); i++) {
+				String current = tasks.get(i).getDescription().toLowerCase();
+				if (current.contains(d)) {
+					answer = tasks.get(i);
+					break;
+				}
+			}
+			return answer;
+		}
+
+		@Override
+		public List<Task> getTasksByCategory(String c) {
+			c = c.toLowerCase();
+			List<Task> answer = new ArrayList<>();
+			for (int i = 0; i < tasks.size(); i++) {
+				String current = tasks.get(i).getCategory().toLowerCase();
+				if(current.contains(c)) {
+					answer.add(tasks.get(i));
+				}
+			}
+			return answer;
+		}
 	}
 
-	@Override
-	public Task editTaskName(Task t, String n) {
-		t.setName(n);
-		return t;
-	}
 
-	@Override
-	public Task editTaskDescritpion(Task t, String d) {
-		t.setDescription(d);
-		return t;
-	}
-
-	@Override
-	public Task editTaskCategory(Task t, String c) {
-		t.setCategory(c);
-		return t;
-	}
-
-
-}

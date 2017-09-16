@@ -1,15 +1,90 @@
-body {
-	background-color: thistle;
+* {
+    font-size: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
+
+body {
+    font-family: Tahoma, Geneva, sans-serif;
+    color: #0a101d;
+    background-image: url("http://streaming.yayimages.com/images/photographer/prill/beb84ea59383157d7ff56f0a92ac84fa/iridescent-glass-beads.jpg");
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+p {
+    font-size: 1.1 em;
+    text-align: justify;
+    margin: 0 3% 1% 3%;
+}
+
+h1, h2, h3 {
+    font-family: Georgia, serif;
+    text-align: center;
+    line-height: .3em;
+    padding: 0;
+}
+
+h1, h2 {
+    font-size: 2.7em;
+    font-weight: 800;
+}
+
+h3 {
+    font-size: 2.1em;
+    font-weight: 700;
+}
+
+h1.myTitle {
+    color: #D9E6D8;
+    text-align: left;
+    display: inline-block;
+    float: left;
+    margin: 2% 0 2% 3%;
+}
+
+div.header {
+    background-color: #26517c;
+    position: fixed;
+    width: 100%;
+    height: 80px;
+}
+
+#hidden_header {
+    width: 100%;
+    height: 80px;
+    visibility: hidden;
+}
+
+div.main {
+	clear: both;
+    background-color: #7dd861;
+    border: 5px solid #224a27;
+    width: 80%;
+    height: 50%;
+    margin: 3% 7%;
+    padding: 3%;
+}
+
 
 table {
 	width: 90%;
-	border: 1px solid navy;
+	/* border: 1px solid #00326e; */
 	padding: 3%;
+    border-collapse: collapse;
+    margin: 0 5%;
 }
 
 td, th {
 	padding: 2%;
+	text-align: center;
+}
+
+input {
+	margin: 2%;
 }
 
 input[value="Edit"] {
@@ -18,6 +93,54 @@ input[value="Edit"] {
 	font-weight: 800;
 	text-align: center;
 	padding: 2%;
-	/*width: 3em;*/
-	margin-left: 20%;
+	margin-left: 10%;
+}
+
+input[name="new"] {
+	margin-left: 45%;
+	background-color: #4daebe;
+}
+
+.cats {
+	font-size: 1.5em;
+	text-align: center;
+}
+
+div#navbar ul {
+	list-style-type: none;
+	padding: 0;
+    margin: 0 0 0 3%;
+}
+
+div#navbar ul li {
+    display: inline-block;
+    float: right;
+	text-align: center;
+	margin: 1% 3% 0 0;
+	padding: 1%;
+    width: 10%;
+}
+
+a {
+    background-color: inherit;
+}
+
+div#navbar ul li a  {
+	font-family: Georgia, Times, serif;
+    font-weight: 600;
+	font-size: .9em;
+	text-decoration: none;
+    color: #D9E6D8;
+}
+
+li.colorButton {
+	background-color:  #19294a;
+}
+
+li.colorButton:hover {
+	background-color: #55146B;
+}
+
+li.colorButton:active {
+	background-color: #74d42c;
 }

@@ -1,7 +1,10 @@
 package com.meirapentermann.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,14 +39,65 @@ public class TaskController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "edit.do",
+	@RequestMapping(path = "select.do",
 			method=RequestMethod.GET) 
-	public ModelAndView goToEditTask(@RequestParam(value="Edit") String e, String name) {
+	public ModelAndView goToEditTask(@RequestParam("item") String item) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("taskview");
-		Task t = new Task();
+		Task t = dao.getTaskByItemName(item);
 		mv.addObject("task", t);
 		return mv;
 	}
-
+	
+	@RequestMapping(path = "save.do",
+			method=RequestMethod.POST) 
+	public ModelAndView saveChangesTask(@Valid Task t, Errors errors, String item, String description,
+			String category, int priority, String imageLink) {
+		ModelAndView mv = new ModelAndView();
+//		System.out.println("Errors = " + errors.getErrorCount());
+//		System.out.println(errors.getAllErrors());
+		if (errors.getErrorCount() == 0) {
+			if(dao.getTaskByItemName(t.getItem()) == null) {
+				dao.addNewTask(t);
+			}
+			else {
+				dao.editTaskItemName(t, item);
+				dao.editTaskDescritpion(t, description);
+				dao.editTaskCategory(t, category);
+				dao.editTaskPriority(t, priority);
+				dao.editTaskLink(t, imageLink);
+			}
+			if(imageLink == "") {
+				dao.editTaskLink(t, "https://cdn2.iconfinder.com/data/icons/business-office-icons/256/To-do_List-256.png");
+			}
+			dao.reOrderTasks();
+			mv.addObject("list", dao.getTasks());
+			mv.setViewName("listview");
+		}
+		else {
+			mv.setViewName("taskview");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(path = "new.do",
+			method=RequestMethod.GET) 
+	public ModelAndView goToNewTask() {
+		ModelAndView mv = new ModelAndView();
+		Task t = new Task();
+		mv.setViewName("taskview");
+		mv.addObject("task", t);
+		return mv;
+	}
+	
+	@RequestMapping(path = "cat.do",
+			method=RequestMethod.GET) 
+	public ModelAndView goToCategories() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("catview");
+		mv.addObject("cats", dao.getCategories());
+		return mv;
+	}
+	
 }
+

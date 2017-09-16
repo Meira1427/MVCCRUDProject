@@ -1,0 +1,9 @@
+<%-- <td><form action="select.do" method="get">
+	<input  type="submit" id="${task.item}" value="Select"></input>
+	</form></td> --%>
+<%-- <td><form:form action="select.do" method="get">
+	<form:input path="task" type="submit" value="Select"></form:input>
+	</form:form></td> --%>
+<%-- <% session.setAttribute("task", "${current}"); %> --%>
+<%-- <input type="submit" name="<c:out value="${current.item}"/>" value="Select"></input> --%>
+<%-- <td><a href="<c:url value="WEB-INF/views/taskview.jsp?item=${current.item}" action="select.do"/>">Select</a></td> --%>

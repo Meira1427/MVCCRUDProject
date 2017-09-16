@@ -33,12 +33,12 @@ public class TaskDAOFileImpl implements TaskDAO {
 			categories = new HashSet<>();
 			while ((line = buf.readLine()) != null) {
 				String[] splitList = line.split(" : ");
-				String name = splitList[0];
+				String item = splitList[0];
 				String descrip = splitList[1];
 				String cat = splitList[2];
 				int prior = Integer.parseInt(splitList[3]);
 				String image = splitList[4];
-				tasks.add(new Task(name, descrip, cat, prior, image));
+				tasks.add(new Task(item, descrip, cat, prior, image));
 				categories.add(cat);
 			}
 		} catch (Exception e) {
@@ -75,14 +75,22 @@ public class TaskDAOFileImpl implements TaskDAO {
 
 	@Override
 	public void addNewTask(Task t) {
+		for (int i = 0; i < tasks.size(); i++) {
+			if (tasks.get(i).getPriority() == t.getPriority()) {
+				for(int j = i; j < tasks.size(); j++) {
+					tasks.get(j).setPriority((tasks.get(j).getPriority()+1));
+				}
+			}
+		}
 		tasks.add(t);
+		categories.add(t.getCategory());
 		this.reOrderTasks();
 	}
 
 	@Override
 	public void removeTask(Task t) {
 		for (int i = 0; i < tasks.size(); i++) {
-			if (t.getName().equals(tasks.get(i).getName())) {
+			if (t.getItem().equals(tasks.get(i).getItem())) {
 				tasks.remove(i);
 			}
 		}
@@ -91,47 +99,73 @@ public class TaskDAOFileImpl implements TaskDAO {
 	
 
 	@Override
-	public Task editTaskPriority(Task t, int p) {
-		t.setPriority(p);
+	public void editTaskPriority(Task t, int p) {
 		for (int i = 0; i < tasks.size(); i++) {
 			if (tasks.get(i).getPriority() == p) {
-				tasks.get(i).setPriority(tasks.get(i).getPriority() + 1);
+				for(int j = i; j < tasks.size(); j++) {
+					tasks.get(j).setPriority((tasks.get(j).getPriority()+1));
+					System.out.println(tasks.get(j).getItem() + " new priority " + tasks.get(j).getPriority());
+				}
+			}
+			if (tasks.get(i).getItem().equals(t.getItem())) {
+				tasks.get(i).setPriority(p);
 			}
 		}
 		this.reOrderTasks();
-		return t;
 	}
 
 	@Override
-	public Task editTaskName(Task t, String n) {
-		t.setName(n);
-		return t;
+	public void editTaskItemName(Task t, String n) {
+		for (int i = 0; i < tasks.size(); i++) {
+			if (tasks.get(i).getItem().equals(t.getItem())) {
+				tasks.get(i).setItem(n);
+			}
+		}
 	}
 
 	@Override
-	public Task editTaskDescritpion(Task t, String d) {
-		t.setDescription(d);
-		return t;
+	public void editTaskDescritpion(Task t, String d) {
+		for (int i = 0; i < tasks.size(); i++) {
+			if (tasks.get(i).getItem().equals(t.getItem())) {
+				tasks.get(i).setDescription(d);
+			}
+		}
 	}
 
 	@Override
-	public Task editTaskCategory(Task t, String c) {
-		t.setCategory(c);
-		return t;
+	public void editTaskCategory(Task t, String c) {
+		for (int i = 0; i < tasks.size(); i++) {
+			if (tasks.get(i).getItem().equals(t.getItem())) {
+				tasks.get(i).setCategory(c);
+			}
+		}
+		categories.add(c);
+	}
+	
+	@Override
+	public void editTaskLink(Task t, String l) {
+		for (int i = 0; i < tasks.size(); i++) {
+			if (tasks.get(i).getItem().equals(t.getItem())) {
+				tasks.get(i).setImageLink(l);
+			}
+		}
 	}
 
 	@Override
 	public void reOrderTasks() {
-		System.out.println("entering reorder tasks");
 		Collections.sort(tasks);
-		System.out.println("exiting reorder tasks");
+		for (int i = 0; i < tasks.size(); i++) {
+			tasks.get(i).setPriority(i+1);
+		}
 	}
 
 	@Override
-	public Task getTaskByName(String n) {
+	public Task getTaskByItemName(String n) {
+		n = n.toLowerCase();
 		Task answer = null;
 		for (int i = 0; i < tasks.size(); i++) {
-			if (tasks.get(i).getName().equals(n)) {
+			String current = tasks.get(i).getItem().toLowerCase();
+			if (current.equals(n)) {
 				answer = tasks.get(i);
 				break;
 			}
@@ -141,9 +175,11 @@ public class TaskDAOFileImpl implements TaskDAO {
 
 	@Override
 	public Task getTaskByDescription(String d) {
+		d = d.toLowerCase();
 		Task answer = null;
 		for (int i = 0; i < tasks.size(); i++) {
-			if (tasks.get(i).getDescription().contains(d)) {
+			String current = tasks.get(i).getDescription().toLowerCase();
+			if (current.contains(d)) {
 				answer = tasks.get(i);
 				break;
 			}
@@ -153,9 +189,11 @@ public class TaskDAOFileImpl implements TaskDAO {
 
 	@Override
 	public List<Task> getTasksByCategory(String c) {
+		c = c.toLowerCase();
 		List<Task> answer = new ArrayList<>();
 		for (int i = 0; i < tasks.size(); i++) {
-			if(tasks.get(i).getCategory().contains(c)) {
+			String current = tasks.get(i).getCategory().toLowerCase();
+			if(current.contains(c)) {
 				answer.add(tasks.get(i));
 			}
 		}

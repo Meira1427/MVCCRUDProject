@@ -1,39 +1,52 @@
 package com.meirapentermann.data;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
 public class Task implements Comparable<Task> {
-	private String name;
+	@Size(min=3, max=30)
+	private String item;
+	
+	@Size(min=3, max=100)
 	private String description;
+	
+	@Size(min=3, max=30)
 	private String category;
+	
+	@Min(1)
+	@Max(300)
 	private int priority;
+	
 	private String imageLink;
 	
 	public Task () {
 	}
 	
-	public Task(String name, String description) {
+	public Task(String item, String description) {
 		this();
-		this.name = name;
+		this.item = item;
 		this.description = description;
 		this.category = "Personal";
 		this.priority = 1;
 		this.imageLink = "http://www.getzcope.com/blog/wp-content/uploads/2009/10/to-do-list.jpg";
 	}
 
-	public Task(String name, String description, String category, int priority, String imageLink) {
+	public Task(String item, String description, String category, int priority, String imageLink) {
 		this();
-		this.name = name;
+		this.item = item;
 		this.description = description;
 		this.category = category;
 		this.priority = priority;
 		this.imageLink = imageLink;
 	}
 
-	public String getName() {
-		return name;
+	public String getItem() {
+		return item;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setItem(String item) {
+		this.item = item;
 	}
 
 	public String getDescription() {
