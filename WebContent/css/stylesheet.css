@@ -1,3 +1,23 @@
 body {
 	background-color: thistle;
 }
+
+table {
+	width: 90%;
+	border: 1px solid navy;
+	padding: 3%;
+}
+
+td, th {
+	padding: 2%;
+}
+
+input[value="Edit"] {
+	background-color: lightblue;
+	border: 1px solid navy;
+	font-weight: 800;
+	text-align: center;
+	padding: 2%;
+	/*width: 3em;*/
+	margin-left: 20%;
+}

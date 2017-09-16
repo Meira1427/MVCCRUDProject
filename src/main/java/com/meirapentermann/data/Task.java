@@ -1,8 +1,6 @@
 package com.meirapentermann.data;
 
-import java.util.Comparator;
-
-public class Task implements Comparator<Task> {
+public class Task implements Comparable<Task> {
 	private String name;
 	private String description;
 	private String category;
@@ -71,16 +69,17 @@ public class Task implements Comparator<Task> {
 	}
 
 	@Override
-	public int compare(Task o1, Task o2) {
-		if (o1.getPriority() > o2.getPriority()) {
+	public int compareTo(Task t) {
+		if (this.getPriority() > t.getPriority()) {
 			return 1;
 		}
-		else if (o2.getPriority() > o1.getPriority()) {
+		else if (t.getPriority() > this.getPriority()) {
 			return -1;
 		}
 		else {
 			return 0;
 		}
 	}
+
 
 }

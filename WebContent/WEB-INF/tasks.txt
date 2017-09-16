@@ -1,6 +1,6 @@
 Personal Site : finish personal site for SD homework : school : 5 : https://pbs.twimg.com/profile_images/720847195860127744/K4Ld3JCd.jpg
-Chiropractor : visit chiropractor for neck : health : 2 : http://chiropractorbackpain.com/wp-content/uploads/2014/12/back-pain-right.png
-Laundry : four laundries to do : household : 3 : http://drwzpk38qkpfb.cloudfront.net/www.universityandstudentservices.com/uploaded/images/New_Temp/New_images/xlaundry2.jpg.pagespeed.ic.pOLSL2IWFv.jpg
+Chiropractor : visit chiropractor for neck : health : 3 : http://chiropractorbackpain.com/wp-content/uploads/2014/12/back-pain-right.png
+Laundry : four laundries to do : household : 2 : http://drwzpk38qkpfb.cloudfront.net/www.universityandstudentservices.com/uploaded/images/New_Temp/New_images/xlaundry2.jpg.pagespeed.ic.pOLSL2IWFv.jpg
 Groceries : get groceries for week : household : 4 : http://i.telegraph.co.uk/multimedia/archive/03323/supermarket_3323456b.jpg
 Blackjack App : convert blackjack to web project : school : 6 : https://www.bettingexpert.com/assets/images/content/Blackjack/en/black-jack-strategien.jpg.pagespeed.ce.nwitYLAS-9.jpg
 Task MVCCrud : finish task project : school : 1 : https://cdn2.iconfinder.com/data/icons/business-office-icons/256/To-do_List-256.png

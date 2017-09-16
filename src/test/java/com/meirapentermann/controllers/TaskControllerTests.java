@@ -32,18 +32,18 @@ public class TaskControllerTests {
 	@Autowired
 	WebApplicationContext wc; //This got created when I told Spring to treat like a WebApp
 							 //It's where all Spring's beans live (Controllers, DAO's, anything Spring created
-//	@Autowired
-//	StateController controller; //Spring created a controller because I annotated my class with @Contoller
-//							    //Here's how I get ahold of that object
-//
-//	MockStateDAO mockDAO;     //This is set as a field
+	@Autowired
+	TaskController controller; //Spring created a controller because I annotated my class with @Contoller
+							    //Here's how I get ahold of that object
+
+	MockTaskDAO mockDAO;     //This is set as a field
 
 	@Before
 	public void setUp() {
-//		mockDAO = wc.getBean(MockStateDAO.class);  //the MockStateDAO was created in StateControllerTests-contex.xml
-//		
-//		// TODO - uncomment below to add a Mock object, which we control
-//		controller.setStateDao(mockDAO);
+		mockDAO = wc.getBean(MockTaskDAO.class);  //the MockStateDAO was created in StateControllerTests-contex.xml
+		
+		// TODO - uncomment below to add a Mock object, which we control
+		controller.setDao(mockDAO);
 		
 		// TODO - build the MockMvc object with MockMvcBuilders
 		mockMvc = MockMvcBuilders.webAppContextSetup(wc).build(); //final step, build the thing to make request
@@ -53,16 +53,16 @@ public class TaskControllerTests {
 
 	@After
 	public void tearDown(){
-//		mockDAO.loadStates(); //cleanup
+		mockDAO.loadTasks(); //cleanup
 	}
 
 	@Test
-	public void test_GET_GetStateData_do_with_valid_name_param_returns_State() {
+	public void test_GET_Something() {
 		try {
-			MvcResult result = mockMvc.perform(get("/GetStateData.do").param("name", "Colorado"))
+			MvcResult result = mockMvc.perform(get("/Something.do").param("name", "Colorado"))
 					.andExpect(status().isOk()).andReturn();
 			ModelAndView mv = result.getModelAndView();
-			assertEquals("result.jsp", mv.getViewName());
+			assertEquals("listview", mv.getViewName());
 			ModelMap map = mv.getModelMap(); //what is in the model and available to JSP?
 			assertNotNull(map.get("state"));
 
