@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -90,9 +91,23 @@ public class TaskDAOFileImpl implements TaskDAO {
 
 	@Override
 	public void removeTask(Task t) {
+		boolean sharedcat = false;
 		for (int i = 0; i < tasks.size(); i++) {
 			if (t.getItem().equals(tasks.get(i).getItem())) {
 				tasks.remove(i);
+			}
+			else if (t.getCategory().equals(tasks.get(i).getCategory())) {
+				sharedcat = true;
+			}
+		}
+		if(!sharedcat) {
+			Iterator<String> i = categories.iterator();
+			while(i.hasNext()){
+				String cat = i.next();
+				if(t.getCategory().equals(cat)) {
+					categories.remove(cat);
+					break;
+				}
 			}
 		}
 		this.reOrderTasks();
