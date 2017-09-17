@@ -1,5 +1,7 @@
 package com.meirapentermann.controllers;
 
+import java.util.Set;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.meirapentermann.data.Task;
 import com.meirapentermann.data.TaskDAO;
+import com.meirapentermann.data.TaskDAOFileImpl;
 
 @Controller
 public class TaskController {
@@ -43,9 +46,11 @@ public class TaskController {
 			method=RequestMethod.GET) 
 	public ModelAndView goToEditTask(@RequestParam("item") String item) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("taskview");
 		Task t = dao.getTaskByItemName(item);
+		mv.addObject("curcat", t.getCategory());
+		mv.addObject("cats", dao.getCategories());
 		mv.addObject("task", t);
+		mv.setViewName("taskview");
 		return mv;
 	}
 	
@@ -86,6 +91,7 @@ public class TaskController {
 		ModelAndView mv = new ModelAndView();
 		Task t = new Task();
 		mv.setViewName("taskview");
+		mv.addObject("cats", dao.getCategories());
 		mv.addObject("task", t);
 		return mv;
 	}
@@ -96,6 +102,43 @@ public class TaskController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("catview");
 		mv.addObject("cats", dao.getCategories());
+		return mv;
+	}
+	
+	
+	@RequestMapping(path = "newcat.do",
+			params="newcat",
+			method=RequestMethod.POST) 
+	public ModelAndView AddNewCategories(@RequestParam("newcat") String n) {
+		ModelAndView mv = new ModelAndView();
+		n = n.toLowerCase();
+		Set<String> newset = dao.getCategories();
+		newset.add(n);
+		((TaskDAOFileImpl)dao).setCategories(newset);
+		mv.addObject("cats", dao.getCategories());
+		mv.setViewName("catview");
+		return mv;
+	}
+	
+	@RequestMapping(path = "newcat.do",
+			method=RequestMethod.GET) 
+	public ModelAndView AddNewCategoryLinking() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("catview");
+		mv.addObject("cats", dao.getCategories());
+		return mv;
+	}
+	
+	@RequestMapping(path = "delete.do",
+			params="item",
+			method=RequestMethod.GET) 
+	public ModelAndView DeleteATask(@RequestParam("item") String item) {
+		ModelAndView mv = new ModelAndView();
+		Task t = dao.getTaskByItemName(item);
+		dao.removeTask(t);
+		dao.reOrderTasks();
+		mv.addObject("list", dao.getTasks());
+		mv.setViewName("listview");
 		return mv;
 	}
 	

@@ -5,9 +5,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.annotation.PostConstruct;
 
@@ -30,7 +30,7 @@ public class TaskDAOFileImpl implements TaskDAO {
 				BufferedReader buf = new BufferedReader(new InputStreamReader(is));) {
 			String line;
 			tasks = new ArrayList<>();
-			categories = new HashSet<>();
+			categories = new TreeSet<>();
 			while ((line = buf.readLine()) != null) {
 				String[] splitList = line.split(" : ");
 				String item = splitList[0];
@@ -75,6 +75,7 @@ public class TaskDAOFileImpl implements TaskDAO {
 
 	@Override
 	public void addNewTask(Task t) {
+		t.setCategory(t.getCategory().toLowerCase());
 		for (int i = 0; i < tasks.size(); i++) {
 			if (tasks.get(i).getPriority() == t.getPriority()) {
 				for(int j = i; j < tasks.size(); j++) {

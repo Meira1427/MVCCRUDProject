@@ -11,17 +11,17 @@
 </head>
 <body>
    <div class="header">
-       <h1 class="myTitle">My Task View</h1>
+       <h1 class="myTitle">Categories</h1>
        <div id="navbar">
            <ul>
-               <li class="colorButton"><a href="#">Choice 3</a></li>
+               <li class="colorButton"><a href="new.do">New Task</a></li>
                <li class="colorButton"><a href="cat.do">Categories</a></li>
-               <li class="colorButton"><a href="home.do">Home</a></li>
+               <li class="colorButton"><a href="home.do">Task List</a></li>
            </ul>
        </div>
    </div>
    <div id="hidden_header">
-       <h1 class="myTitle">My Task View</h1>
+       <h1 class="myTitle">Categories</h1>
        <div id="navbar">
            <ul>
                <li class="colorButton"><a href="#">Choice 3</a></li>
@@ -37,7 +37,8 @@
 			<c:forEach var="cat" items="${cats}">
 				${cat}<br>
 			</c:forEach>
-			<input type="submit" name="submit" value="New Category"></input>
+			<input type="text" name="newcat"></input>
+			<input type="submit" name="submit" value="Submit New Category"></input>
 		</form:form>
 	</div>
   </div>

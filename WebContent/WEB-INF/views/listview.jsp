@@ -14,9 +14,9 @@
        <h1 class="myTitle">My Task List</h1>
        <div id="navbar">
            <ul>
-               <li class="colorButton"><a href="#">Choice 3</a></li>
+               <li class="colorButton"><a href="new.do">New Task</a></li>
                <li class="colorButton"><a href="cat.do">Categories</a></li>
-               <li class="colorButton"><a href="home.do">Home</a></li>
+               <li class="colorButton"><a href="home.do">Task List</a></li>
            </ul>
        </div>
    </div>
@@ -43,12 +43,12 @@
 		</tr>
 		<c:forEach var="task" items="${list}">
 		<tr>
-			<td><img src="${task.imageLink}" alt="task" width="50" height="50"></td>
+			<td><a href="select.do?item=${task.item}"><img src="${task.imageLink}" alt="task" width="50" height="50"></a></td>
 			<td>${task.priority}</td>
 			<td>${task.item}</td>
 			<td>${task.description}</td>
 			<td>${task.category}</td>
-			<td><a href="select.do?item=${task.item}">Select</a></td>
+			<td><a href="select.do?item=${task.item}"><input type="submit" value="Select"/></a></td>
 		</tr>
 		<c:set var="count" value="${count+1}"/>
 		</c:forEach>

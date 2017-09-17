@@ -7,3 +7,10 @@
 <%-- <% session.setAttribute("task", "${current}"); %> --%>
 <%-- <input type="submit" name="<c:out value="${current.item}"/>" value="Select"></input> --%>
 <%-- <td><a href="<c:url value="WEB-INF/views/taskview.jsp?item=${current.item}" action="select.do"/>">Select</a></td> --%>
+
+<%-- <form:select path="category">
+			<c:forEach var="cat" items="${cats}">
+				${cat}
+				<form:option value="${cat}">${cat}</form:option>
+			</c:forEach>
+		</form:select> --%>
