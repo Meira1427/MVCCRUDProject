@@ -83,27 +83,34 @@ td, th {
 	text-align: center;
 }
 
-input {
+input[type="submit"]{
+	font-weight: 400;
+	font-size: .8em;
+	text-align: center;
+	background-color: #4daebe;
 	margin: 2%;
+	padding: 1%;
 }
 
-input[value="Edit"] {
-	background-color: lightblue;
-	border: 1px solid navy;
-	font-weight: 800;
-	text-align: center;
-	padding: 2%;
+input[value="Select"] {
 	margin-left: 10%;
 }
 
 input[name="new"] {
 	margin-left: 45%;
-	background-color: #4daebe;
+}
+
+input[name="submitcat"] {
+	font-size: .6em;
 }
 
 .cats {
 	font-size: 1.5em;
 	text-align: center;
+}
+
+div.newform input{
+	margin: 0 2% 3% 0;
 }
 
 div#navbar ul {

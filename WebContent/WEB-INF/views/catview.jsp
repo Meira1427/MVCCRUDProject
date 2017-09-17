@@ -38,7 +38,7 @@
 				${cat}<br>
 			</c:forEach>
 			<input type="text" name="newcat"></input>
-			<input type="submit" name="submit" value="Submit New Category"></input>
+			<input type="submit" name="submitcat" value="Submit New Category"></input>
 		</form:form>
 	</div>
   </div>
