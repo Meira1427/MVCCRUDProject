@@ -111,10 +111,12 @@ public class TaskController {
 			method=RequestMethod.POST) 
 	public ModelAndView AddNewCategories(@RequestParam("newcat") String n) {
 		ModelAndView mv = new ModelAndView();
-		n = n.toLowerCase();
-		Set<String> newset = dao.getCategories();
-		newset.add(n);
-		((TaskDAOFileImpl)dao).setCategories(newset);
+		if(n.length()>3) {
+			n = n.toLowerCase();
+			Set<String> newset = dao.getCategories();
+			newset.add(n);
+			((TaskDAOFileImpl)dao).setCategories(newset);
+		}
 		mv.addObject("cats", dao.getCategories());
 		mv.setViewName("catview");
 		return mv;

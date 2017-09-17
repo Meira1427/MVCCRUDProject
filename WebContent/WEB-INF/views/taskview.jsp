@@ -33,7 +33,9 @@
    <div class="main">
    	<div class="newform">
 	   <form:form action="save.do" method="post" modelAttribute="task">
+			<form:errors path="item"></form:errors>
 			Item: <form:input path="item" name="item" value="${task.item}"></form:input><br>
+			<form:errors path="description"></form:errors>
 			Description: <form:input path="description" name="description" value="${task.description}"></form:input><br>
 			Category: <%-- <form:input path="category" name="category" value="${task.category}"></form:input><br> --%>
 			<form:select path="category" value="${curcat}">
@@ -41,6 +43,7 @@
 					<form:option value="${cat}">${cat}</form:option>
 				</c:forEach>
 			</form:select>
+			<form:errors path="priority"></form:errors>
 			Priority: <form:input path="priority" name="priority" value="${task.priority}"></form:input><br>
 			Image Link: <form:input path="imageLink" name="imageLink" value="${task.imageLink}"></form:input><br>
 			<input type="submit" name="submit" value="Save"></input>

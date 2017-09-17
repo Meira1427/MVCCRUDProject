@@ -33,13 +33,13 @@
    <div class="main">
    	<h2>Categories</h2>
    	 <div class="cats">
-	   <form:form action="newcat.do" method="post" modelAttribute="task">
+		<form action="newcat.do" method="post" modelAttribute="task">
 			<c:forEach var="cat" items="${cats}">
 				${cat}<br>
 			</c:forEach>
 			<input type="text" name="newcat"></input>
 			<input type="submit" name="submitcat" value="Submit New Category"></input>
-		</form:form>
+		</form>
 	</div>
   </div>
 </body>
