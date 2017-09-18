@@ -2,6 +2,7 @@ package com.meirapentermann.controllers;
 
 	import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -167,6 +168,25 @@ import com.meirapentermann.data.TaskDAO;
 			}
 			return answer;
 		}
+
+		@Override
+		public boolean deleteCategory(String c) {
+			for (int i = 0; i < tasks.size(); i++) {
+				if(tasks.get(i).getCategory().equals(c)) {
+					return false;
+				}
+			}
+			Iterator<String> i = categories.iterator();
+			while(i.hasNext()){
+				String cat = i.next();
+				if(cat.equals(c)) {
+					categories.remove(cat);
+					break;
+				}
+			}
+			return true;
+		}
+		
 	}
 
 

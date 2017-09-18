@@ -1,5 +1,7 @@
 package com.meirapentermann.controllers;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -141,6 +143,22 @@ public class TaskController {
 		dao.reOrderTasks();
 		mv.addObject("list", dao.getTasks());
 		mv.setViewName("listview");
+		return mv;
+	}
+	
+	@RequestMapping(path = "deletecat.do",
+			method=RequestMethod.POST) 
+	public ModelAndView DeleteACat(@RequestParam("delcat") String cat) {
+		ModelAndView mv = new ModelAndView();
+		cat = cat.toLowerCase();
+		boolean deleteOkay = dao.deleteCategory(cat);
+		if(deleteOkay) {
+			mv.addObject("cats", dao.getCategories());
+			mv.setViewName("catview");
+		}
+		else {
+			mv.setViewName("error");
+		}
 		return mv;
 	}
 	

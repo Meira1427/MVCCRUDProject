@@ -31,20 +31,8 @@
        </div>
    </div>
    <div class="main">
-   	<h2>Categories</h2>
-   	 <div class="cats">
-		<form action="newcat.do" method="post"> <!-- modelAttribute="task"> -->
-			<c:forEach var="cat" items="${cats}">
-				${cat}<br>
-			</c:forEach>
-			<input type="text" name="newcat"></input>
-			<input type="submit" name="submitcat" value="New Category"></input>
-		</form>
-		<form action="deletecat.do" method="post">
-			<input type="text" name="delcat"></input>
-			<input type="submit" name="delete" value="Delete Category"></input>
-		</form>
-	</div>
+   	<h2>Error</h2>
+   	<h5>You cannot delete a category that is in use.</h5>
   </div>
 </body>
 </html>

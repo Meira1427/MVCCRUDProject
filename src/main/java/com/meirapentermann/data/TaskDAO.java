@@ -17,4 +17,5 @@ public interface TaskDAO {
 	public List<Task> getTasksByCategory(String c);
 	public List<Task> getTasks();
 	public Set<String> getCategories();
+	public boolean deleteCategory(String c);
 }
