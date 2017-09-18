@@ -26,6 +26,7 @@ import com.meirapentermann.data.TaskDAO;
 		}
 		
 		public void loadTasks() {
+			tasks.clear();
 			tasks.add(new Task("Task 1", "Description 1", "", 1, "https://cdn2.iconfinder.com/data/icons/business-office-icons/256/To-do_List-256.png"));
 			tasks.add(new Task("Task 2", "Description 2", "", 2, "https://cdn2.iconfinder.com/data/icons/business-office-icons/256/To-do_List-256.png"));
 			tasks.add(new Task("Task 3", "Description 3", "", 3, "https://cdn2.iconfinder.com/data/icons/business-office-icons/256/To-do_List-256.png"));

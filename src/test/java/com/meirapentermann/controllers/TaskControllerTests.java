@@ -70,4 +70,20 @@ public class TaskControllerTests {
 			fail(e.toString());
 		}
 	}
+	
+	@Test
+	public void test_cat_do_returns_catview() {
+		try {
+			MvcResult result = mockMvc.perform(get("/cat.do"))
+					.andExpect(status().isOk()).andReturn();
+			ModelAndView mv = result.getModelAndView();
+			assertEquals("catview", mv.getViewName());
+			ModelMap map = mv.getModelMap(); //what is in the model and available to JSP?
+			assertNotNull(map.get("cats"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
 }
