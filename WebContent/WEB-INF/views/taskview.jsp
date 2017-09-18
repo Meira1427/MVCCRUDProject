@@ -38,6 +38,7 @@
 			<form:errors path="description"></form:errors>
 			Description: <form:input path="description" name="description" value="${task.description}"></form:input><br>
 			Category: <%-- <form:input path="category" name="category" value="${task.category}"></form:input><br> --%>
+			<form:errors path="category" items="${cats}"></form:errors>
 			<form:select path="category" value="${curcat}">
 				<c:forEach var="cat" items="${cats}">
 					<form:option value="${cat}">${cat}</form:option>

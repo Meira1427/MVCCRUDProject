@@ -11,6 +11,32 @@ This is an individual application not a public wiki, so imagine that the user lo
 ##Technologies
 We used Spring STS and Gradle to manage the project. I had most of the functionality in the TaskDAOFileImpl class and the TaskController.
 
+##Methods TaskDAOFileImpl
+public void init() - load tasks from file
+
+public void addNewTask(Task t) - adds to tasks ArrayList
+
+public void removeTask(Task t) - remove from tasks ArrayList. If its category is not being used by other tasks, also removes category from categories TreeSet
+
+public void editTaskPriority(Task t, int p) - edits
+priority of this task and bumps all tasks at or after this priority number by +1
+
+public void editTaskItemName(Task t, String n) - edits Item
+
+public void editTaskDescritpion(Task t, String d) - edits Description
+
+public void editTaskCategory(Task t, String c) - edits Category
+
+public void editTaskLink(Task t, String l) - edits imageLink
+
+public void reOrderTasks() - reorders and assigns them new priority (index of array + 1)
+
+public Task getTaskByItemName(String n) - takes in item
+name, lower cases, returns task that contains that string in its Item field
+
+public boolean deleteCategory(String c) - deletes a
+category, but only if that category is not currently being used. Returns true if successful. False if category is currently being used.
+
 ##Future Features
 I need to add the "filter by category" feature to the main page. And I would love to allow user to pick different themes to change colors.
 
@@ -20,4 +46,4 @@ When transitioning to select.do, choosing the "select" button next to a task, I 
 Once I learned that strategy, passing the param along the href path, I could use it to link up the pictures and input buttons not part of a form.
 
 ##Stumbling JUNIT
-This was not a test-driven project because I had trouble setting up my JUNIT tests. Just some dumb mistakes from copying over StateLab test files.
+This was not a test-driven project because I had trouble setting up my JUNIT tests.

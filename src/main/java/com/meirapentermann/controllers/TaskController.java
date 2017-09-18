@@ -82,6 +82,7 @@ public class TaskController {
 			mv.setViewName("listview");
 		}
 		else {
+			mv.addObject("cats", dao.getCategories());
 			mv.setViewName("taskview");
 		}
 		return mv;
