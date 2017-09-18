@@ -18,3 +18,6 @@ I need to add the "filter by category" feature to the main page. And I would lov
 When transitioning to select.do, choosing the "select" button next to a task, I went down many rabbit holes trying to pass the current task to the controller. I eventually got help from Steve.TheYounger and used this strategy.
 <a href="select.do?item=${task.item}"><input type="submit" value="Select"/></a>
 Once I learned that strategy, passing the param along the href path, I could use it to link up the pictures and input buttons not part of a form.
+
+##Stumbling JUNIT
+This was not a test-driven project because I had trouble setting up my JUNIT tests. Just some dumb mistakes from copying over StateLab test files.
