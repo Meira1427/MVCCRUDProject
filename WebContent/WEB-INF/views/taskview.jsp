@@ -21,7 +21,7 @@
        </div>
    </div>
    <div id="hidden_header">
-       <h1 class="myTitle">My Task View</h1>
+       <h1 class="myTitle">Task View</h1>
        <div id="navbar">
            <ul>
           	   <li class="colorButton"><a href="#">Choice 3</a></li>

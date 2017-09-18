@@ -120,12 +120,15 @@ public class TaskDAOFileImpl implements TaskDAO {
 			if (tasks.get(i).getPriority() == p) {
 				for(int j = i; j < tasks.size(); j++) {
 					tasks.get(j).setPriority((tasks.get(j).getPriority()+1));
-					System.out.println(tasks.get(j).getItem() + " new priority " + tasks.get(j).getPriority());
+					//System.out.println(tasks.get(j).getItem() + " new priority " + tasks.get(j).getPriority());
 				}
+	
 			}
 			if (tasks.get(i).getItem().equals(t.getItem())) {
 				tasks.get(i).setPriority(p);
+				//System.out.println(tasks.get(i).getItem() + " new priority " + tasks.get(i).getPriority());
 			}
+			
 		}
 		this.reOrderTasks();
 	}
