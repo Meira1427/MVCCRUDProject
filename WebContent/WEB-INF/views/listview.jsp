@@ -12,22 +12,18 @@
 <body>
    <div class="header">
        <h1 class="myTitle">My Task List</h1>
-       <div id="navbar">
-           <ul>
-               <li class="colorButton"><a href="new.do">New Task</a></li>
-               <li class="colorButton"><a href="cat.do">Categories</a></li>
-               <li class="colorButton"><a href="home.do">Task List</a></li>
-           </ul>
+      <div id="navbar">
+       <a href="new.do" class="colorButton"><input type="submit" value="New Task"></input></a>
+       <a href="cat.do" class="colorButton"><input type="submit" value="Categories"></input></a>
+       <a href="home.do" class="colorButton"><input type="submit" value="Task List"></input></a>
        </div>
    </div>
    <div id="hidden_header">
        <h1 class="myTitle">My Task List</h1>
-       <div id="navbar">
-           <ul>
-               <li class="colorButton"><a href="#">Choice 3</a></li>
-               <li class="colorButton"><a href="#">Categories</a></li>
-               <li class="colorButton"><a href="#">Home</a></li>
-           </ul>
+   <div id="navbar">
+       <a href="new.do" class="colorButton"><input type="submit" value="New Task"></input></a>
+       <a href="cat.do" class="colorButton"><input type="submit" value="Categories"></input></a>
+       <a href="home.do" class="colorButton"><input type="submit" value="Task List"></input></a>
        </div>
    </div>
    <div class="main">
