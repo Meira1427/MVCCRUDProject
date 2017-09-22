@@ -5,14 +5,16 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 public class Task implements Comparable<Task> {
+	private int id;
+	
 	@Size(min=3, max=30)
 	private String item;
 	
 	@Size(min=3, max=100)
 	private String description;
 	
-	@Size(min=3, max=30)
-	private String category;
+	@Min(1)
+	private int category_id;
 	
 	@Min(1)
 	@Max(300)
@@ -23,22 +25,31 @@ public class Task implements Comparable<Task> {
 	public Task () {
 	}
 	
-	public Task(String item, String description) {
+	public Task(int id, String item, String description, int category, int priority, String imageLink) {
 		this();
+		this.id = id;
 		this.item = item;
 		this.description = description;
-		this.category = "Personal";
-		this.priority = 1;
-		this.imageLink = "http://www.getzcope.com/blog/wp-content/uploads/2009/10/to-do-list.jpg";
-	}
-
-	public Task(String item, String description, String category, int priority, String imageLink) {
-		this();
-		this.item = item;
-		this.description = description;
-		this.category = category;
+		this.category_id = category;
 		this.priority = priority;
 		this.imageLink = imageLink;
+	}
+
+	public Task(String item, String description, int category, int priority, String imageLink) {
+		this();
+		this.item = item;
+		this.description = description;
+		this.category_id = category;
+		this.priority = priority;
+		this.imageLink = imageLink;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getItem() {
@@ -57,12 +68,20 @@ public class Task implements Comparable<Task> {
 		this.description = description;
 	}
 
-	public String getCategory() {
-		return category;
+	public int getCategoryID() {
+		return category_id;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCategoryID(int category) {
+		this.category_id = category;
+	}
+	
+	public String getCategory() {
+		return "lookup";
+	}
+
+	public void setCategory(String cat) {
+		//lookup in table
 	}
 
 	public int getPriority() {

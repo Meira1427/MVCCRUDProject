@@ -26,7 +26,7 @@ public class TaskDAOFileImpl implements TaskDAO {
 	private WebApplicationContext wc;
 	
 	@PostConstruct
-	public void init() {
+	public void init() { 
 		try (InputStream is = wc.getServletContext().getResourceAsStream(fileName);
 				BufferedReader buf = new BufferedReader(new InputStreamReader(is));) {
 			String line;
@@ -37,9 +37,10 @@ public class TaskDAOFileImpl implements TaskDAO {
 				String item = splitList[0];
 				String descrip = splitList[1];
 				String cat = splitList[2];
+				int cat_id = 4;
 				int prior = Integer.parseInt(splitList[3]);
 				String image = splitList[4];
-				tasks.add(new Task(item, descrip, cat, prior, image));
+				tasks.add(new Task(item, descrip, cat_id, prior, image));
 				categories.add(cat);
 			}
 		} catch (Exception e) {
@@ -76,7 +77,7 @@ public class TaskDAOFileImpl implements TaskDAO {
 
 	@Override
 	public void addNewTask(Task t) {
-		t.setCategory(t.getCategory().toLowerCase());
+		//t.setCategory(t.getCategory().toLowerCase());
 		for (int i = 0; i < tasks.size(); i++) {
 			if (tasks.get(i).getPriority() == t.getPriority()) {
 				for(int j = i; j < tasks.size(); j++) {
@@ -85,7 +86,7 @@ public class TaskDAOFileImpl implements TaskDAO {
 			}
 		}
 		tasks.add(t);
-		categories.add(t.getCategory());
+		//categories.add(t.getCategory());
 		this.reOrderTasks();
 	}
 

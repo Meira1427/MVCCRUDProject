@@ -27,9 +27,9 @@ import com.meirapentermann.data.TaskDAO;
 		
 		public void loadTasks() {
 			tasks.clear();
-			tasks.add(new Task("Task 1", "Description 1", "", 1, "https://cdn2.iconfinder.com/data/icons/business-office-icons/256/To-do_List-256.png"));
-			tasks.add(new Task("Task 2", "Description 2", "", 2, "https://cdn2.iconfinder.com/data/icons/business-office-icons/256/To-do_List-256.png"));
-			tasks.add(new Task("Task 3", "Description 3", "", 3, "https://cdn2.iconfinder.com/data/icons/business-office-icons/256/To-do_List-256.png"));
+//			tasks.add(new Task("Task 1", "Description 1", "", 1, "https://cdn2.iconfinder.com/data/icons/business-office-icons/256/To-do_List-256.png"));
+//			tasks.add(new Task("Task 2", "Description 2", "", 2, "https://cdn2.iconfinder.com/data/icons/business-office-icons/256/To-do_List-256.png"));
+//			tasks.add(new Task("Task 3", "Description 3", "", 3, "https://cdn2.iconfinder.com/data/icons/business-office-icons/256/To-do_List-256.png"));
 		}
 
 		public MockTaskDAO (List<Task> tasks) {
@@ -108,11 +108,7 @@ import com.meirapentermann.data.TaskDAO;
 
 		@Override
 		public void editTaskCategory(Task t, String c) {
-			for (int i = 0; i < tasks.size(); i++) {
-				if (tasks.get(i).getItem().equals(t.getItem())) {
-					tasks.get(i).setCategory(c);
-				}
-			}
+	
 		}
 		
 		@Override
@@ -159,35 +155,13 @@ import com.meirapentermann.data.TaskDAO;
 
 		@Override
 		public List<Task> getTasksByCategory(String c) {
-			c = c.toLowerCase();
-			List<Task> answer = new ArrayList<>();
-			for (int i = 0; i < tasks.size(); i++) {
-				String current = tasks.get(i).getCategory().toLowerCase();
-				if(current.contains(c)) {
-					answer.add(tasks.get(i));
-				}
-			}
-			return answer;
+			return null;
 		}
 
 		@Override
 		public boolean deleteCategory(String c) {
-			for (int i = 0; i < tasks.size(); i++) {
-				if(tasks.get(i).getCategory().equals(c)) {
-					return false;
-				}
-			}
-			Iterator<String> i = categories.iterator();
-			while(i.hasNext()){
-				String cat = i.next();
-				if(cat.equals(c)) {
-					categories.remove(cat);
-					break;
-				}
-			}
-			return true;
+			return false;
 		}
-		
 	}
 
 
