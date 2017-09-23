@@ -61,10 +61,9 @@ public class TaskController {
 	public ModelAndView saveChangesTask(@Valid Task t, Errors errors, String item, String description,
 			String category, int priority, String imageLink) {
 		ModelAndView mv = new ModelAndView();
-//		System.out.println("Errors = " + errors.getErrorCount());
-//		System.out.println(errors.getAllErrors());
+		System.out.println("In Save.do");
 		if (errors.getErrorCount() == 0) {
-			if(dao.getTaskByItemName(t.getItem()) == null) {
+			if(t.getItem() == null) {
 				dao.addNewTask(t);
 			}
 			else {
@@ -116,9 +115,7 @@ public class TaskController {
 		ModelAndView mv = new ModelAndView();
 		if(n.length()>3) {
 			n = n.toLowerCase();
-			Set<String> newset = dao.getCategories();
-			newset.add(n);
-			((TaskDAOFileImpl)dao).setCategories(newset);
+			dao.addCategory(n);
 		}
 		mv.addObject("cats", dao.getCategories());
 		mv.setViewName("catview");

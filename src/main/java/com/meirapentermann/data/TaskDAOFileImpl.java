@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
-@Component
 public class TaskDAOFileImpl implements TaskDAO {
 	private String fileName = "WEB-INF/tasks.txt";
 	private List<Task> tasks;
@@ -37,10 +36,9 @@ public class TaskDAOFileImpl implements TaskDAO {
 				String item = splitList[0];
 				String descrip = splitList[1];
 				String cat = splitList[2];
-				int cat_id = 4;
 				int prior = Integer.parseInt(splitList[3]);
 				String image = splitList[4];
-				tasks.add(new Task(item, descrip, cat_id, prior, image));
+				tasks.add(new Task(item, descrip, cat, prior, image));
 				categories.add(cat);
 			}
 		} catch (Exception e) {
@@ -237,4 +235,23 @@ public class TaskDAOFileImpl implements TaskDAO {
 		}
 		return true;
 	}
+
+	@Override
+	public Task getTaskByPriority(int p) {
+		// This was added for DB implementation; Doesn't work here
+		return null;
+	}
+
+	@Override
+	public void addCategory(String c) {
+		// This was added for DB implementation; Doesn't work here
+		
+	}
+
+	@Override
+	public Task getTaskByID(int n) {
+		// This was added for DB implementation; Doesn't work here
+		return null;
+	}
+
 }

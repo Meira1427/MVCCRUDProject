@@ -162,6 +162,24 @@ import com.meirapentermann.data.TaskDAO;
 		public boolean deleteCategory(String c) {
 			return false;
 		}
+
+		@Override
+		public Task getTaskByPriority(int p) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void addCategory(String c) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Task getTaskByID(int n) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	}
 
 

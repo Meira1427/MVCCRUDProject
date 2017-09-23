@@ -13,10 +13,9 @@ public class Task implements Comparable<Task> {
 	@Size(min=3, max=100)
 	private String description;
 	
-	@Min(1)
-	private int category_id;
+	private String category;
 	
-	@Min(1)
+	@Min(0)
 	@Max(300)
 	private int priority;
 	
@@ -25,21 +24,21 @@ public class Task implements Comparable<Task> {
 	public Task () {
 	}
 	
-	public Task(int id, String item, String description, int category, int priority, String imageLink) {
+	public Task(int id, String item, String description, String cat, int priority, String imageLink) {
 		this();
 		this.id = id;
 		this.item = item;
 		this.description = description;
-		this.category_id = category;
+		this.category = cat;
 		this.priority = priority;
 		this.imageLink = imageLink;
 	}
 
-	public Task(String item, String description, int category, int priority, String imageLink) {
+	public Task(String item, String description, String category, int priority, String imageLink) {
 		this();
 		this.item = item;
 		this.description = description;
-		this.category_id = category;
+		this.category = category;
 		this.priority = priority;
 		this.imageLink = imageLink;
 	}
@@ -67,21 +66,13 @@ public class Task implements Comparable<Task> {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public int getCategoryID() {
-		return category_id;
-	}
-
-	public void setCategoryID(int category) {
-		this.category_id = category;
-	}
 	
 	public String getCategory() {
-		return "lookup";
+		return category;
 	}
 
 	public void setCategory(String cat) {
-		//lookup in table
+		this.category = cat;
 	}
 
 	public int getPriority() {

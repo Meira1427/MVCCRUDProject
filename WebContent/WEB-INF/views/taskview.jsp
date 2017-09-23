@@ -29,6 +29,7 @@
    <div class="main">
    	<div class="newform">
 	   <form:form action="save.do" method="post" modelAttribute="task">
+			<input type="hidden" name="id" value="${task.id}"></input>
 			<form:errors path="item"></form:errors>
 			Item: <form:input path="item" name="item" value="${task.item}"></form:input><br>
 			<form:errors path="description"></form:errors>
