@@ -91,16 +91,12 @@ public class TaskDAODBImpl implements TaskDAO {
 			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, t.getItem());
 			stmt.setString(2, t.getDescription());
-			System.out.println("Cat Name "+ t.getCategory());
 			String catName = t.getCategory();
 			int catNum = getCategoryNumber(catName);
-			System.out.println("Cat Num " + catNum);
 			stmt.setInt(3, catNum);
 			stmt.setInt(4, t.getPriority());
 			stmt.setString(5, t.getImageLink());
-			System.out.println("JustBefore executeUpdate()");
 			int updateCount = stmt.executeUpdate();
-			System.out.println("updateCount " + updateCount);
 			if (updateCount == 1) {
 				ResultSet keys = stmt.getGeneratedKeys();
 				if (keys.next()) {
@@ -137,7 +133,6 @@ public class TaskDAODBImpl implements TaskDAO {
 		    PreparedStatement stmt = conn.prepareStatement(sql);
 		    stmt.setInt(1, t.getId());
 		    int updateCount = stmt.executeUpdate();
-		    //System.out.println("updateCount = " + updateCount);
 		    conn.commit();             // COMMIT TRANSACTION
 		    conn.close();
 		    stmt.close();
@@ -152,6 +147,52 @@ public class TaskDAODBImpl implements TaskDAO {
 		    }
 		  }
 	}
+	
+	@Override
+	public void editTask(Task t, int p, String n, String d, String c, String l) {
+		Connection conn = null;
+		int currentPriority = 0;
+		try {
+		    conn = DriverManager.getConnection(url, user, pass);
+		    conn.setAutoCommit(false);
+		    String sql1 = "select priority from task where id=?";
+		    PreparedStatement stmt1 = conn.prepareStatement(sql1);
+		    stmt1.setInt(1, t.getId());
+		    ResultSet rs = stmt1.executeQuery();
+		    if (rs.next()) {
+		    		currentPriority = rs.getInt(1);
+		    }
+		    if(currentPriority > p) {
+		    		p--;
+		    }
+		    int catNum = getCategoryNumber(c);
+		    String sql = "UPDATE task set priority=?, item =?, "+
+		    		" description=?, category_id=?, " +
+		    		" image_link=? WHERE id = ? ";
+		    PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, p);
+			stmt.setString(2, n);
+			stmt.setString(3, d);
+			stmt.setInt(4, catNum);
+			stmt.setString(5, l);
+		    stmt.setInt(6, t.getId());
+		    int updateCount = stmt.executeUpdate();
+            if (updateCount == 1) {
+                conn.commit();
+            }
+            stmt.close();
+            conn.close();
+		  } catch (SQLException e) {
+			    e.printStackTrace();
+	            if (conn != null) {
+	                try {
+	                    conn.rollback();
+	                } catch (SQLException e1) {
+	                    e1.printStackTrace();
+	                }
+	            }
+		  }
+	}
 
 	@Override
 	public void editTaskPriority(Task t, int p) {
@@ -161,14 +202,8 @@ public class TaskDAODBImpl implements TaskDAO {
 		    conn.setAutoCommit(false);
 		    String sql = "UPDATE task set priority=? "
 		    		+ " WHERE id = ?";
-		    //System.out.println(t.getItem() + " w/ ID: " + t.getId() + " Priority: " + p);
 		    PreparedStatement stmt = conn.prepareStatement(sql);
-		    if(t.getPriority() <= p) {
-		    		stmt.setInt(1, (p));
-			}
-			else {
-				stmt.setInt(1, (p-1));
-			}
+			stmt.setInt(1, (p-1));
 		    stmt.setInt(2, t.getId());
 		    int updateCount = stmt.executeUpdate();
             if (updateCount == 1) {

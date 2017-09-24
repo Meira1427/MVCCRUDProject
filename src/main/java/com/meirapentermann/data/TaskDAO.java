@@ -7,6 +7,7 @@ public interface TaskDAO {
 	public void addNewTask(Task t);
 	public void removeTask(Task t);
 	public void reOrderTasks();
+	public void editTask(Task t, int p, String n, String d, String c, String l);
 	public void editTaskPriority(Task t, int p);
 	public void editTaskItemName(Task t, String n);
 	public void editTaskDescritpion(Task t, String d);

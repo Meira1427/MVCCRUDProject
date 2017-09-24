@@ -61,17 +61,12 @@ public class TaskController {
 	public ModelAndView saveChangesTask(@Valid Task t, Errors errors, String item, String description,
 			String category, int priority, String imageLink) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("In Save.do");
 		if (errors.getErrorCount() == 0) {
-			if(t.getItem() == null) {
+			if(t.getId() == 0) {
 				dao.addNewTask(t);
 			}
 			else {
-				dao.editTaskItemName(t, item);
-				dao.editTaskDescritpion(t, description);
-				dao.editTaskCategory(t, category);
-				dao.editTaskPriority(t, priority);
-				dao.editTaskLink(t, imageLink);
+				dao.editTask(t, priority, item, description, category, imageLink);
 			}
 			if(imageLink == "") {
 				dao.editTaskLink(t, "https://cdn2.iconfinder.com/data/icons/business-office-icons/256/To-do_List-256.png");

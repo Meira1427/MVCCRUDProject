@@ -180,6 +180,12 @@ import com.meirapentermann.data.TaskDAO;
 			// TODO Auto-generated method stub
 			return null;
 		}
+
+		@Override
+		public void editTask(Task t, int p, String n, String d, String c, String l) {
+			// TODO Auto-generated method stub
+			
+		}
 	}
 
 
