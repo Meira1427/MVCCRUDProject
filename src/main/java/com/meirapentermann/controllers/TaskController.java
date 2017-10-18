@@ -108,7 +108,7 @@ public class TaskController {
 			method=RequestMethod.POST) 
 	public ModelAndView AddNewCategories(@RequestParam("newcat") String n) {
 		ModelAndView mv = new ModelAndView();
-		if(n.length()>3) {
+		if(n.length()>1) {
 			n = n.toLowerCase();
 			dao.addCategory(n);
 		}
