@@ -71,46 +71,6 @@ import com.meirapentermann.data.TaskDAO;
 			this.reOrderTasks();
 		}
 		
-
-		@Override
-		public void editTaskPriority(Task t, int p) {
-			for (int i = 0; i < tasks.size(); i++) {
-				if (tasks.get(i).getPriority() == p) {
-					tasks.get(i).setPriority(p + 1);
-					for(int j = i; j < tasks.size(); j++) {
-						tasks.get(j).setPriority(tasks.get(j).getPriority() +1);
-					}
-				}
-				if (tasks.get(i).getItem().equals(t.getItem())) {
-					tasks.get(i).setPriority(p);
-				}
-			}
-			this.reOrderTasks();
-		}
-
-		@Override
-		public void editTaskItemName(Task t, String n) {
-			for (int i = 0; i < tasks.size(); i++) {
-				if (tasks.get(i).getItem().equals(t.getItem())) {
-					tasks.get(i).setItem(n);
-				}
-			}
-		}
-
-		@Override
-		public void editTaskDescritpion(Task t, String d) {
-			for (int i = 0; i < tasks.size(); i++) {
-				if (tasks.get(i).getItem().equals(t.getItem())) {
-					tasks.get(i).setDescription(d);
-				}
-			}
-		}
-
-		@Override
-		public void editTaskCategory(Task t, String c) {
-	
-		}
-		
 		@Override
 		public void editTaskLink(Task t, String l) {
 			for (int i = 0; i < tasks.size(); i++) {

@@ -193,35 +193,6 @@ public class TaskDAODBImpl implements TaskDAO {
 	            }
 		  }
 	}
-
-	@Override
-	public void editTaskPriority(Task t, int p) {
-		Connection conn = null;
-		try {
-		    conn = DriverManager.getConnection(url, user, pass);
-		    conn.setAutoCommit(false);
-		    String sql = "UPDATE task set priority=? "
-		    		+ " WHERE id = ?";
-		    PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, (p-1));
-		    stmt.setInt(2, t.getId());
-		    int updateCount = stmt.executeUpdate();
-            if (updateCount == 1) {
-                conn.commit();
-            }
-            stmt.close();
-            conn.close();
-		  } catch (SQLException e) {
-			    e.printStackTrace();
-	            if (conn != null) {
-	                try {
-	                    conn.rollback();
-	                } catch (SQLException e1) {
-	                    e1.printStackTrace();
-	                }
-	            }
-		  }
-	}
 	
 	public void editTaskForRenumber(Task t, int p) {
 		Connection conn = null;
@@ -232,94 +203,6 @@ public class TaskDAODBImpl implements TaskDAO {
 		    		+ " WHERE id = ?";
 		    PreparedStatement stmt = conn.prepareStatement(sql);
 		    stmt.setInt(1, p);
-		    stmt.setInt(2, t.getId());
-		    int updateCount = stmt.executeUpdate();
-            if (updateCount == 1) {
-                conn.commit();
-            }
-            stmt.close();
-            conn.close();
-		  } catch (SQLException e) {
-			    e.printStackTrace();
-	            if (conn != null) {
-	                try {
-	                    conn.rollback();
-	                } catch (SQLException e1) {
-	                    e1.printStackTrace();
-	                }
-	            }
-		  }
-	}
-
-	@Override
-	public void editTaskItemName(Task t, String n) {
-		Connection conn = null;
-		try {
-		    conn = DriverManager.getConnection(url, user, pass);
-		    conn.setAutoCommit(false);
-		    String sql = "UPDATE task set item=? "
-		    		+ " WHERE id = ?";
-		    PreparedStatement stmt = conn.prepareStatement(sql);
-		    stmt.setString(1, n);
-		    stmt.setInt(2, t.getId());
-		    int updateCount = stmt.executeUpdate();
-            if (updateCount == 1) {
-                conn.commit();
-            }
-            stmt.close();
-            conn.close();
-		  } catch (SQLException e) {
-			    e.printStackTrace();
-	            if (conn != null) {
-	                try {
-	                    conn.rollback();
-	                } catch (SQLException e1) {
-	                    e1.printStackTrace();
-	                }
-	            }
-		  }
-	}
-
-	@Override
-	public void editTaskDescritpion(Task t, String d) {
-		Connection conn = null;
-		try {
-		    conn = DriverManager.getConnection(url, user, pass);
-		    conn.setAutoCommit(false);
-		    String sql = "UPDATE task set description=? "
-		    		+ " WHERE id = ?";
-		    PreparedStatement stmt = conn.prepareStatement(sql);
-		    stmt.setString(1, d);
-		    stmt.setInt(2, t.getId());
-		    int updateCount = stmt.executeUpdate();
-            if (updateCount == 1) {
-                conn.commit();
-            }
-            stmt.close();
-            conn.close();
-		  } catch (SQLException e) {
-			    e.printStackTrace();
-	            if (conn != null) {
-	                try {
-	                    conn.rollback();
-	                } catch (SQLException e1) {
-	                    e1.printStackTrace();
-	                }
-	            }
-		  }
-	}
-
-	@Override
-	public void editTaskCategory(Task t, String c) {
-		Connection conn = null;
-		int catNum = getCategoryNumber(c);
-		try {
-		    conn = DriverManager.getConnection(url, user, pass);
-		    conn.setAutoCommit(false);
-		    String sql = "UPDATE task set category_id=? "
-		    		+ " WHERE id = ?";
-		    PreparedStatement stmt = conn.prepareStatement(sql);
-		    stmt.setInt(1, catNum);
 		    stmt.setInt(2, t.getId());
 		    int updateCount = stmt.executeUpdate();
             if (updateCount == 1) {

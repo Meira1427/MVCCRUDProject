@@ -8,10 +8,6 @@ public interface TaskDAO {
 	public void removeTask(Task t);
 	public void reOrderTasks();
 	public void editTask(Task t, int p, String n, String d, String c, String l);
-	public void editTaskPriority(Task t, int p);
-	public void editTaskItemName(Task t, String n);
-	public void editTaskDescritpion(Task t, String d);
-	public void editTaskCategory(Task t, String c);
 	public void editTaskLink(Task t, String l);
 	public Task getTaskByID(int n);
 	public Task getTaskByItemName(String n);
